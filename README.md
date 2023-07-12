@@ -69,4 +69,4 @@ detectors %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-![](README_files/figure-gfm/plot-1.png)<!-- -->
+<img src="README_files/figure-gfm/plot-1.png" alt="A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers."  />
