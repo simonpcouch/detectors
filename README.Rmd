@@ -16,7 +16,7 @@ The study authors carried out a series of experiments passing a number of essays
 
 You can install the data package with the following code:
 
-```{r, eval = FALSE}
+```{r load, eval = FALSE}
 require(pak)
 pak::pak("simonpcouch/detectors")
 ```
@@ -25,9 +25,27 @@ pak::pak("simonpcouch/detectors")
 
 Taking a look at the data:
 
-```{r}
-library(tibble)
+```{r print, warning = FALSE, message = FALSE}
+library(tidyverse)
 library(detectors)
 
 detectors
+```
+
+An example plot demonstrates the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author:
+
+```{r plot}
+detectors %>%
+  filter(!is.na(native)) %>%
+  ggplot() +
+  aes(x = detector, y = .pred_AI, fill = native) +
+  geom_violin(bw = .05) +
+  labs(
+    x = "GPT Detector Tool",
+    y = "Predicted Probability That\nSample Was Written by AI",
+    fill = "Native\nEnglish\nWriter"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(type = "qual") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```

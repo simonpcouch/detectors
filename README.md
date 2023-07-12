@@ -28,7 +28,7 @@ pak::pak("simonpcouch/detectors")
 Taking a look at the data:
 
 ``` r
-library(tibble)
+library(tidyverse)
 library(detectors)
 
 detectors
@@ -48,3 +48,25 @@ detectors
     ##  9 Human 0        Human       ZeroGPT      Yes    Real… Human         781 <NA>  
     ## 10 Human 1.00     AI          Sapling      No     Real… Human         460 <NA>  
     ## # ℹ 6,175 more rows
+
+An example plot demonstrates the distributions of predicted
+probabilities that a text sample was written by AI depending on the GPT
+detector model and lived experience in writing English of the author:
+
+``` r
+detectors %>%
+  filter(!is.na(native)) %>%
+  ggplot() +
+  aes(x = detector, y = .pred_AI, fill = native) +
+  geom_violin(bw = .05) +
+  labs(
+    x = "GPT Detector Tool",
+    y = "Predicted Probability That\nSample Was Written by AI",
+    fill = "Native\nEnglish\nWriter"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(type = "qual") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+```
+
+![](README_files/figure-gfm/plot-1.png)<!-- -->
