@@ -5,8 +5,8 @@
 detectors. The data is based on the pre-print:
 
 **GPT Detectors Are Biased Against Non-Native English Writers.** *Weixin
-Liang*, *Mert Yuksekgonul*, *Yining Mao*, *Eric Wu*, *James Zou.* arXiv:
-[2304.02819](https://arxiv.org/abs/2304.02819)
+Liang*, *Mert Yuksekgonul*, *Yining Mao*, *Eric Wu*, *James Zou.*
+[CellPress Patterns](https://doi.org/10.1016/j.patter.2023.100779).
 
 The study authors carried out a series of experiments passing a number
 of essays to different GPT detection models. Juxtaposing detector

@@ -31,7 +31,7 @@ form of "prompt engineering" passed to the model.}
 For more information on these data, see the source paper.
 }
 \source{
-\url{https://arxiv.org/pdf/2304.02819.pdf}
+\url{https://doi.org/10.1016/j.patter.2023.100779}
 }
 \usage{
 detectors
