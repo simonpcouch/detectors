@@ -56,7 +56,7 @@ detectors <-
     kind = if_else(kind == "Human-Written", "Human", "AI", NA_character_),
     kind = factor(kind, levels = c("AI", "Human")),
     .pred_class = if_else(.pred_AI > .5, "AI", "Human"),
-    .pred_class = factor(kind, levels = c("AI", "Human")),
+    .pred_class = factor(.pred_class, levels = c("AI", "Human")),
     native = case_when(
       name %in% c("Real TOEFL") ~ "No",
       name %in% c("US 8th grade essay", "Real College Essays",
