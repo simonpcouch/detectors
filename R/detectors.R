@@ -1,6 +1,6 @@
 #' Predictions from GPT Detectors
 #'
-#' Data derived from the pre-print _GPT detectors are biased against
+#' Data derived from the paper _GPT detectors are biased against
 #' non-native English writers._ The study authors carried out a series of
 #' experiments passing a number of essays to different GPT detection models.
 #' Juxtaposing detector predictions for papers written by native and non-native

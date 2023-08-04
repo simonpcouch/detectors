@@ -2,7 +2,7 @@
 # detectors
 
 `detectors` is an R data package containing predictions from various GPT
-detectors. The data is based on the pre-print:
+detectors. The data is based on the paper:
 
 **GPT Detectors Are Biased Against Non-Native English Writers.** *Weixin
 Liang*, *Mert Yuksekgonul*, *Yining Mao*, *Eric Wu*, *James Zou.*

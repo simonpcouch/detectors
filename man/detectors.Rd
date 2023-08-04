@@ -37,7 +37,7 @@ For more information on these data, see the source paper.
 detectors
 }
 \description{
-Data derived from the pre-print \emph{GPT detectors are biased against
+Data derived from the paper \emph{GPT detectors are biased against
 non-native English writers.} The study authors carried out a series of
 experiments passing a number of essays to different GPT detection models.
 Juxtaposing detector predictions for papers written by native and non-native
