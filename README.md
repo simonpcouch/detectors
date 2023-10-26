@@ -20,7 +20,7 @@ You can install the data package with the following code:
 
 ``` r
 require(pak)
-pak::pak("simonpcouch/detectors")
+pak("simonpcouch/detectors")
 ```
 
 ## Example
@@ -28,7 +28,7 @@ pak::pak("simonpcouch/detectors")
 Taking a look at the data:
 
 ``` r
-library(tidyverse)
+library(ggplot2)
 library(detectors)
 
 detectors
@@ -36,7 +36,7 @@ detectors
 
     ## # A tibble: 6,185 × 9
     ##    kind  .pred_AI .pred_class detector     native name  model document_id prompt
-    ##    <chr>    <dbl> <chr>       <chr>        <chr>  <chr> <chr>       <dbl> <chr> 
+    ##    <fct>    <dbl> <fct>       <chr>        <chr>  <chr> <chr>       <dbl> <chr> 
     ##  1 Human 1.00     AI          Sapling      No     Real… Human         497 <NA>  
     ##  2 Human 0.828    AI          Crossplag    No     Real… Human         278 <NA>  
     ##  3 Human 0.000214 Human       Crossplag    Yes    Real… Human         294 <NA>  
@@ -54,8 +54,8 @@ probabilities that a text sample was written by AI depending on the GPT
 detector model and lived experience in writing English of the author:
 
 ``` r
-detectors %>%
-  filter(!is.na(native)) %>%
+detectors_plot <- 
+  detectors[!is.na(detectors$native), ] %>%
   ggplot() +
   aes(x = detector, y = .pred_AI, fill = native) +
   geom_violin(bw = .05) +
@@ -67,6 +67,17 @@ detectors %>%
   theme_minimal() +
   scale_fill_brewer(type = "qual") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+
+detectors_plot
 ```
 
-<img src="README_files/figure-gfm/plot-1.png" alt="A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers."  />
+<figure>
+<img src="inst/figures/plot-1.png"
+alt="“A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers.”" />
+<figcaption aria-hidden="true">“A ggplot side-by-side density plot
+showing the distributions of predicted probabilities that a text sample
+was written by AI depending on the GPT detector model and lived
+experience in writing English of the author. All shown models classify
+samples written by native English writers well, and do so variably
+poorly for non-native English writers.”</figcaption>
+</figure>

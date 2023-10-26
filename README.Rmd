@@ -2,6 +2,12 @@
 output: github_document
 ---
 
+```{r setup, echo = FALSE} 
+should_eval <- "ggplot2" %in% installed.packages()
+
+knitr::opts_chunk$set(eval = should_eval)
+```
+
 # detectors
 
 `detectors` is an R data package containing predictions from various GPT detectors. The data is based on the paper:
@@ -18,15 +24,22 @@ You can install the data package with the following code:
 
 ```{r load, eval = FALSE}
 require(pak)
-pak::pak("simonpcouch/detectors")
+pak("simonpcouch/detectors")
 ```
 
 ## Example
 
 Taking a look at the data:
 
-```{r print, warning = FALSE, message = FALSE}
-library(tidyverse)
+```{r print, eval = FALSE}
+library(ggplot2)
+library(detectors)
+
+detectors
+```
+
+```{r load-pkgs, echo = FALSE, warning = FALSE, message = FALSE, eval = should_eval}
+library(ggplot2)
 library(detectors)
 
 detectors
@@ -34,9 +47,9 @@ detectors
 
 An example plot demonstrates the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author:
 
-```{r plot, fig.alt = "A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers."}
-detectors %>%
-  filter(!is.na(native)) %>%
+```{r plot, fig.alt = "A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers.", eval = FALSE}
+detectors_plot <- 
+  detectors[!is.na(detectors$native), ] %>%
   ggplot() +
   aes(x = detector, y = .pred_AI, fill = native) +
   geom_violin(bw = .05) +
@@ -48,4 +61,12 @@ detectors %>%
   theme_minimal() +
   scale_fill_brewer(type = "qual") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
+
+detectors_plot
 ```
+
+```{r, echo = FALSE, eval = FALSE}
+ggsave("inst/figures/plot-1.png", detectors_plot)
+```
+
+!["A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers."](inst/figures/plot-1.png)

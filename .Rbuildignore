@@ -2,7 +2,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 data-raw/
-README.Rmd
+^README.Rmd
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
