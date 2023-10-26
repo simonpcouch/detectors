@@ -70,20 +70,20 @@
 <p>You can install the data package with the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://pak.r-lib.org/" class="external-link">pak</a></span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"simonpcouch/detectors"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"simonpcouch/detectors"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Taking a look at the data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://simonpcouch.github.io/detectors/">detectors</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">detectors</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6,185 × 9</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    kind  .pred_AI .pred_class detector     native name  model document_id prompt</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;       &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; </span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Human 1.00     AI          Sapling      No     Real… Human         497 &lt;NA&gt;  </span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Human 0.828    AI          Crossplag    No     Real… Human         278 &lt;NA&gt;  </span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Human 0.000214 Human       Crossplag    Yes    Real… Human         294 &lt;NA&gt;  </span></span>
@@ -97,8 +97,8 @@
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 6,175 more rows</span></span></code></pre></div>
 <p>An example plot demonstrates the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">detectors</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">native</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">detectors_plot</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">detectors</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">detectors</span><span class="op">$</span><span class="va">native</span><span class="op">)</span>, <span class="op">]</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">detector</span>, y <span class="op">=</span> <span class="va">.pred_AI</span>, fill <span class="op">=</span> <span class="va">native</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_violin</span><span class="op">(</span>bw <span class="op">=</span> <span class="fl">.05</span><span class="op">)</span> <span class="op">+</span></span>
@@ -109,8 +109,12 @@
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_brewer</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="README_files/figure-gfm/plot-1.png" alt="A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers."></p>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">detectors_plot</span></span></code></pre></div>
+<figure><img src="inst/figures/plot-1.png" alt="“A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers.”"><figcaption aria-hidden="true">
+“A ggplot side-by-side density plot showing the distributions of predicted probabilities that a text sample was written by AI depending on the GPT detector model and lived experience in writing English of the author. All shown models classify samples written by native English writers well, and do so variably poorly for non-native English writers.”
+</figcaption></figure>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
