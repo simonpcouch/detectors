@@ -1,6 +1,6 @@
 Package: detectors
 Title: Prediction Data from GPT Detectors
-Version: 0.0.1
+Version: 0.1.0
 Authors@R:
     person("Simon", "Couch", , "simonpatrickcouch@gmail.com", role = c("cre", "aut"))
 Description: Researchers carried out a series of experiments passing a number 

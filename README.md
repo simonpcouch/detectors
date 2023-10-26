@@ -20,7 +20,7 @@ You can install the data package with the following code:
 
 ``` r
 require(pak)
-pak("simonpcouch/detectors")
+pak("detectors")
 ```
 
 ## Example

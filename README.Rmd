@@ -24,7 +24,7 @@ You can install the data package with the following code:
 
 ```{r load, eval = FALSE}
 require(pak)
-pak("simonpcouch/detectors")
+pak("detectors")
 ```
 
 ## Example
