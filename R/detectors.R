@@ -37,5 +37,5 @@
 #'
 #' detectors
 #'
-#' @source <https://doi.org/10.1016/j.patter.2023.100779>
+#' @source \doi{10.1016/j.patter.2023.100779}
 "detectors"
